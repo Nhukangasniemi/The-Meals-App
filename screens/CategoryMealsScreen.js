@@ -28,7 +28,7 @@ CategoryMealsScreen.navigationOptions = navigationData => {
     const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
     return {
-        headerTitle: selectedCategory.title
+        headerTitle: selectedCategory.title,
     }
 };
 

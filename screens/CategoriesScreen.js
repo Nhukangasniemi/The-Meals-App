@@ -10,19 +10,23 @@ import {
 } from "react-native";
 import { CATEGORIES } from "./../data/dummy-data";
 import Colors from "../constants/Colors";
-import CategoryGridTile from '../components/CategoryGridTile'
+import CategoryGridTile from "../components/CategoryGridTile";
 
 const CategoriesScreen = props => {
   const renderGridItem = itemData => {
     return (
-      <CategoryGridTile color={itemData.item.color} title={itemData.item.title} onSelect={() => {
-        props.navigation.navigate({
-          routeName: "CategoryMeals",
-          params: {
-            categoryId: itemData.item.id
-          }
-        });
-      }} />
+      <CategoryGridTile
+        color={itemData.item.color}
+        title={itemData.item.title}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "CategoryMeals",
+            params: {
+              categoryId: itemData.item.id
+            }
+          });
+        }}
+      />
     );
   };
 

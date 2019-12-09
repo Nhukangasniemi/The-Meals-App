@@ -24,6 +24,6 @@ CategoryMealsScreen.navigationOptions = navigationData => {
   return {
     headerTitle: selectedCategory.title
   };
-};
+}; 
 
 export default CategoryMealsScreen;

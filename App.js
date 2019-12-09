@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 import MealsNavigator from './navigation/MealsNavigator'
-import { useScreens } from 'react-native-screens'
+import { useScreens, enableScreens } from 'react-native-screens'
 
-useScreens() //React-native-screens making the app renders for better performance in large application
+enableScreens() //React-native-screens making the app renders for better performance in large application
 
 const fetchFonts = () => {
   return Font.loadAsync({

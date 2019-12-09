@@ -14,89 +14,102 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import FiltersScreen from "./../screens/FiltersScreen";
 
 const defaultNavOptions = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "white"
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+    headerStyle: {
+        backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "white"
+    },
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
 };
 
 const MealsNavigator = createStackNavigator(
-  {
-    Categories: {
-      screen: CategoriesScreen,
-      navigationOptions: {
-        headerTitle: "Meal Categories"
-      }
+    {
+        Categories: {
+            screen: CategoriesScreen,
+            navigationOptions: {
+                headerTitle: "Meal Categories"
+            }
+        },
+        CategoryMeals: { screen: CategoryMealsScreen },
+        MealDetail: MealDetailScreen
     },
-    CategoryMeals: { screen: CategoryMealsScreen },
-    MealDetail: MealDetailScreen
-  },
-  {
-    defaultNavigationOptions: defaultNavOptions
-  }
+    {
+        defaultNavigationOptions: defaultNavOptions
+    }
 );
 
 const FavNavigator = createStackNavigator(
-  {
-    Favorites: {
-      screen: FavoritesScreen
+    {
+        Favorites: {
+            screen: FavoritesScreen
+        },
+        MealDetail: MealDetailScreen
     },
-    MealDetail: MealDetailScreen
-  },
-  {
-    defaultNavigationOptions: defaultNavOptions
-  }
+    {
+        defaultNavigationOptions: defaultNavOptions
+    }
 );
 
 const tabScreenConfig = {
-  Meals: {
-    screen: MealsNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return (
-          <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
-        );
-      },
-      tabBarColor: Colors.primaryColor
+    Meals: {
+        screen: MealsNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return (
+                    <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
+                );
+            },
+            tabBarColor: Colors.primaryColor
+        }
+    },
+    Favorites: {
+        screen: FavNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
+            },
+            tabBarColor: Colors.accentColor
+        }
     }
-  },
-  Favorites: {
-    screen: FavNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
-      },
-      tabBarColor: Colors.accentColor
-    }
-  }
 };
 
 const MealsFavTabNavigator =
-  Platform.OS === "android"
-    ? createMaterialBottomTabNavigator(tabScreenConfig, {
-        activeColor: "white",
-        shifting: true
-      })
-    : createBottomTabNavigator(tabScreenConfig, {
-        tabBarOptions: {
-          activeTintColor: Colors.accent
-        }
-      });
+    Platform.OS === "android"
+        ? createMaterialBottomTabNavigator(tabScreenConfig, {
+            activeColor: "white",
+            shifting: true
+        })
+        : createBottomTabNavigator(tabScreenConfig, {
+            tabBarOptions: {
+                activeTintColor: Colors.accent
+            }
+        });
 
 const FiltersNavigator = createStackNavigator(
-  {
-    Filters: FiltersScreen
-  },
-  {
-    defaultNavigationOptions: defaultNavOptions
-  }
+    {
+        Filters: FiltersScreen
+    },
+    {
+        defaultNavigationOptions: defaultNavOptions
+    }
 );
 
 const MainNavigator = createDrawerNavigator(
-  {
-    MealsFavs: MealsFavTabNavigator,
-    Filters: FiltersNavigator
-  }
+    {
+        MealsFavs: {
+            screen: MealsFavTabNavigator,
+            navigationOptions: {
+                drawerLabel: "Meals"
+            }
+        },
+        Filters: FiltersNavigator
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.accentColor,
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            }
+        }
+    }
 );
 
 export default createAppContainer(MainNavigator);

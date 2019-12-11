@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 import MealsNavigator from './navigation/MealsNavigator'
@@ -8,12 +8,12 @@ import { createStore, combineReducers} from 'redux'
 import mealsReducer from './store/reducers/meals'
 import {Provider} from 'react-redux'
 
-enableScreens() //React-native-screens making the app renders for better performance in large application
+useScreens() //React-native-screens making the app renders for better performance in large application
 
 const rootReducer = combineReducers({
   meals: mealsReducer
 })
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, composeWithDevTools())
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -35,11 +35,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
